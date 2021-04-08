@@ -4,13 +4,34 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: '/index',
     pathMatch: 'full'
   },
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+  {
+    path: 'index',
+    loadChildren: () => import('./index/index.module').then( m => m.IndexPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'access-right-error',
+    loadChildren: () => import('./access-right-error/access-right-error.module').then( m => m.AccessRightErrorPageModule)
+  },
+  {
+    path: 'create-order',
+    loadChildren: () => import('./customerAdmin/create-order/create-order.module').then( m => m.CreateOrderPageModule)
+  },
+  {
+    path: 'view-orders',
+    loadChildren: () => import('./customerAdmin/view-orders/view-orders.module').then( m => m.ViewOrdersPageModule)
   }
+
+
 ];
 
 @NgModule({
