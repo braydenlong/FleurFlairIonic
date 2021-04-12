@@ -20,6 +20,6 @@ export class AppComponent {
 	// 	{ title: 'Login', url: '/login', icon: 'lock-closed' }
 	// ];
 
-  public labels = ['View Articles', 'Create Bouquet', 'My Orders',];
+  public labels = ['View Articles', 'Create Bouquet', 'My Orders'];
   constructor() {}
 }
