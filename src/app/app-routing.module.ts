@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard'; 
 
 const routes: Routes = [
   {
@@ -7,14 +8,12 @@ const routes: Routes = [
     redirectTo: '/index',
     pathMatch: 'full'
   },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
+  
   {
     path: 'index',
     loadChildren: () => import('./index/index.module').then( m => m.IndexPageModule)
-  },  {
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
