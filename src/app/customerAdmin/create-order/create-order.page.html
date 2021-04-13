@@ -69,6 +69,17 @@
           </ion-item>
 
           <ion-item>
+            <ion-label><b>Bouquet Type</b></ion-label>
+            <ion-select placeholder="Select One" id="type" name="type" #size="ngModel"
+              [(ngModel)]="type" required="true">
+              <ion-select-option value = {{BouquetTypeEnum.FIXED}}>Fixed</ion-select-option>
+              <ion-select-option value = {{BouquetTypeEnum.CUSTOM}}>Custom</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+
+          <div *ngIf = "type == BouquetTypeEnum.CUSTOM">
+          <ion-item>
             <ion-label><b>Bouquet Size</b></ion-label>
             <ion-select placeholder="Select One" id="size" name="size" #size="ngModel"
               [(ngModel)]="size" required="true">
@@ -80,30 +91,54 @@
           </ion-item>
 
           <ion-item>
-            <ion-label><b>Bouquet Type</b></ion-label>
-            <ion-select placeholder="Select One" id="type" name="type" #size="ngModel"
-              [(ngModel)]="type" required="true">
-              <ion-select-option value = {{BouquetTypeEnum.FIXED}}>Fixed</ion-select-option>
-              <ion-select-option value = {{BouquetTypeEnum.CUSTOM}}>Custom</ion-select-option>
-            </ion-select>
-          </ion-item>
-
-          <ion-item>
             <ion-label><b>Flowers</b></ion-label>
-            <ion-select placeholder="Select One or Multiple" id="flower" name="flower" #category="ngModel"
+            <ion-select placeholder="Select A Main Flower" id="flower" name="flower" #category="ngModel"
+              [(ngModel)]="flowerIds" required="true">
+              <ion-select-option *ngFor="let flower of flowers" value="{{flower.flowerId}}">{{flower.name}}
+              </ion-select-option>
+            </ion-select>
+            </ion-item>
+
+         
+          <div *ngIf = "size == SizeEnum.SMALL">
+            <ion-item>
+            <ion-label><b>Fillers</b></ion-label>
+            <ion-select placeholder="Select One" id="flower" name="flower" #category="ngModel"
+              [(ngModel)]="flowerIds" required="true">
+              <ion-select-option *ngFor="let flower of flowers" value="{{flower.flowerId}}">{{flower.name}}
+              </ion-select-option>
+            </ion-select>
+            </ion-item>
+          </div>
+          <div *ngIf = "size == SizeEnum.MEDIUM">
+            <ion-item>
+            <ion-label><b>Fillers</b></ion-label>
+            <ion-select placeholder="Select Multiple" id="flower" name="flower" #category="ngModel"
               [(ngModel)]="flowerIds" multiple = "true" required="true">
               <ion-select-option *ngFor="let flower of flowers" value="{{flower.flowerId}}">{{flower.name}}
               </ion-select-option>
             </ion-select>
-          </ion-item>
+            </ion-item>
+          </div>
+          <div *ngIf = "size == SizeEnum.LARGE">
+            <ion-item>
+            <ion-label><b>Fillers</b></ion-label>
+            <ion-select placeholder="Select Multiple" id="flower" name="flower" #category="ngModel"
+              [(ngModel)]="flowerIds" multiple = "true" required="true">
+              <ion-select-option *ngFor="let flower of flowers" value="{{flower.flowerId}}">{{flower.name}}
+              </ion-select-option>
+            </ion-select>
+            </ion-item>
+          </div>
 
           <ion-item>
             <ion-label><b>Wrappings</b></ion-label>
-            <ion-select placeholder="Select One or Multiple" id="wrapping" name="wrapping" [(ngModel)]="wrappingId" 
-            multiple="true" required = "true">
+            <ion-select placeholder="Select One" id="wrapping" name="wrapping" [(ngModel)]="wrappingId" 
+            required = "true">
               <ion-select-option *ngFor="let wrapping of wrappings" value="{{wrappping.wrappingId}}">{{wrapping.name}}</ion-select-option>
             </ion-select>
           </ion-item>
+        </div>
 
         </ion-list>
 
@@ -118,7 +153,7 @@
           Clear
         </ion-button>
         <ion-button type="submit" ion-button block>
-          Create
+          Create Buoquet
         </ion-button>
       </ion-card-content>
 
