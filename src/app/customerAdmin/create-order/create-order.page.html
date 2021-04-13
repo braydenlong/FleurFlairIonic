@@ -1,9 +1,129 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>CreateOrder</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Create New Order</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form #createOrderForm="ngForm" (ngSubmit)="create(createOrderForm)">
+    <ion-card>
+
+      <ion-card-content>
+
+        <div *ngIf="resultSuccess == true" style="color: blue;">
+          {{message}}
+        </div>
+
+        <div *ngIf="resultError == true" style="color: red;">
+          {{message}}
+        </div>
+
+        <div style="color: red;">
+
+         
+
+          <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
+            <div *ngIf="name.errors.required">
+              Your bouquet name is required.
+            </div>
+          </div>
+
+          <div *ngIf="size.invalid && (size.dirty || size.touched || submitted)" class="errorText">
+            <div *ngIf="size.errors.required">
+              Bouquet size is required.
+            </div>
+          </div>
+
+          <div *ngIf="type.invalid && (type.dirty || type.touched || submitted)"
+            class="errorText">
+            <div *ngIf="type.errors.required">
+              Bouquet type is required.
+            </div>
+          </div>
+
+          <div *ngIf="flowers.invalid && (flowers.dirty || flowers.touched || submitted)"
+            class="errorText">
+            <div *ngIf="flowers.errors.required">
+              Flower selection is required.
+            </div>
+          </div>
+
+          <div *ngIf="wrapping.invalid && (wrapping.dirty || wrapping.touched || submitted)"
+            class="errorText">
+            <div *ngIf="wrapping.errors.required">
+              Wrapping selection is required.
+            </div>
+          </div>
+
+        </div>
+
+        <ion-list>
+
+          <ion-item>
+            <ion-label><b>Bouquet Name</b></ion-label>
+            <ion-input type="text" id="name" name="name" [(ngModel)]="newOrder.bouquet.name" required="true" #name="ngModel">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label><b>Bouquet Size</b></ion-label>
+            <ion-select placeholder="Select One" id="size" name="size" #size="ngModel"
+              [(ngModel)]="size" required="true">
+              <ion-select-option value = {{SizeEnum.SMALL}}>Small</ion-select-option>
+              <ion-select-option value = {{SizeEnum.MEDIUM}}>Medium</ion-select-option>
+              <ion-select-option value = {{SizeEnum.LARGE}}>Large</ion-select-option>
+              
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label><b>Bouquet Type</b></ion-label>
+            <ion-select placeholder="Select One" id="type" name="type" #size="ngModel"
+              [(ngModel)]="type" required="true">
+              <ion-select-option value = {{BouquetTypeEnum.FIXED}}>Fixed</ion-select-option>
+              <ion-select-option value = {{BouquetTypeEnum.CUSTOM}}>Custom</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label><b>Flowers</b></ion-label>
+            <ion-select placeholder="Select One or Multiple" id="flower" name="flower" #category="ngModel"
+              [(ngModel)]="flowerIds" multiple = "true" required="true">
+              <ion-select-option *ngFor="let flower of flowers" value="{{flower.flowerId}}">{{flower.name}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label><b>Wrappings</b></ion-label>
+            <ion-select placeholder="Select One or Multiple" id="wrapping" name="wrapping" [(ngModel)]="wrappingId" 
+            multiple="true" required = "true">
+              <ion-select-option *ngFor="let wrapping of wrappings" value="{{wrappping.wrappingId}}">{{wrapping.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-list>
+
+      </ion-card-content>
+
+    </ion-card>
+
+    <ion-card style="text-align: center;">
+
+      <ion-card-content>
+        <ion-button (click)="clear()">
+          Clear
+        </ion-button>
+        <ion-button type="submit" ion-button block>
+          Create
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+  </form>
 
 </ion-content>
