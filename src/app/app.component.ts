@@ -28,23 +28,21 @@ export class AppComponent {
 		{ title: 'Home', url: '/login', icon: 'home' },
 		{
 			title: 'View Articles',
-			url: '',
+			url: '/login',
 			icon: 'list-circle'
 		},
 		{
 			title: 'Create Order',
-			url: '/CustomerAdmin/createOrder',
+			url: '/create-order',
 			icon: 'add-circle'
 		},
     {
 			title: 'My Orders',
-			url: '/CustomerAdmin/viewOrders',
+			url: '/view-orders',
 			icon: 'list-circle'
 		}
 
 	];
-
-  //public labels = ['View Articles', 'Create Bouquet', 'My Orders'];
   
   constructor(public sessionService: SessionService) {
 	}
