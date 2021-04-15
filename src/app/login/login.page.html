@@ -1,12 +1,20 @@
 <ion-header>
-  <ion-toolbar>
+	<ion-card *ngIf="sessionService.getIsLogin() == false">
+  		<ion-toolbar color="dark">
 		<ion-buttons slot="start">      
 			<ion-button (click)="back()">
 				<ion-icon slot="start" name="arrow-back"></ion-icon>
 			</ion-button>
 		</ion-buttons>
 		<ion-title>Login</ion-title> 
+		</ion-toolbar>
+	</ion-card>
+	<ion-card *ngIf="sessionService.getIsLogin() == true">
+	<ion-toolbar color = "dark" *ngIf="sessionService.getIsLogin() == true">
+		
+		<ion-title>Fleur Flair</ion-title> 
 	</ion-toolbar>
+	</ion-card>
 </ion-header>
 
 <ion-content>
@@ -52,20 +60,20 @@
 			<ion-list>
 
 				<ion-item>
-					<ion-label fixed>Username</ion-label>
+					<ion-label fixed><b>Username: </b></ion-label>
 					<ion-input type="text" id="username" name="username" [(ngModel)]="username" maxlength="64" required="true" #inusername="ngModel"></ion-input>
 				</ion-item>
 
 				<ion-item>
-					<ion-label fixed>Password</ion-label>
+					<ion-label fixed><b>Password: </b></ion-label>
 					<ion-input type="password" id="password" name="password" [(ngModel)]="password" maxlength="64" required="true" #inpassword="ngModel"></ion-input>
 				</ion-item>
 				
 				<ion-item>
-					<ion-button (click)="clear()">
+					<ion-button color = "dark" (click)="clear()">
 						Clear
 					</ion-button>					
-					<ion-button type="submit" ion-button block>
+					<ion-button color = "dark" type="submit" ion-button block>
 						Login
 					</ion-button>
 				</ion-item>
@@ -93,7 +101,7 @@
 <ion-footer *ngIf="sessionService.getIsLogin() == true">
 
 	<ion-toolbar>
-		<ion-button expand="full" (click)="staffLogout()">
+		<ion-button expand="full" (click)="customerLogout()">
 			<ion-icon slot="start" name="exit"></ion-icon>
 			Logout
 		</ion-button>

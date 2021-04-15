@@ -37,7 +37,7 @@ export class SessionService {
 
 	setCurrentCustomer(currentCustomer: Customer | null): void
 	{		 
-		sessionStorage.currentStaff = JSON.stringify(currentCustomer);
+		sessionStorage.currentCustomer = JSON.stringify(currentCustomer);
 	}
 
 

@@ -1,6 +1,6 @@
 {
 	"/api": {
-		"target": "http://localhost:8080/FleurFlair-RWS/Resources",
+		"target": "http://localhost:8080/FleurFlairRws/Resources",
 		"secure": false,
 		"pathRewrite": {
 		  "^/api": ""

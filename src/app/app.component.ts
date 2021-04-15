@@ -25,15 +25,16 @@ export class AppComponent {
 	];
 
   public appPagesCustomerAdmin = [
+		{ title: 'Home', url: '/login', icon: 'home' },
 		{
 			title: 'View Articles',
 			url: '',
-			icon: 'add-circle'
+			icon: 'list-circle'
 		},
 		{
 			title: 'Create Order',
 			url: '/CustomerAdmin/createOrder',
-			icon: 'list-circle'
+			icon: 'add-circle'
 		},
     {
 			title: 'My Orders',
