@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ViewOrdersPageRoutingModule } from './view-orders-routing.module';
 
-import { ViewOrdersPage } from './view-orders.page';
+import { ViewOrdersPage } from './view-orders.page'; 
 
 @NgModule({
   imports: [

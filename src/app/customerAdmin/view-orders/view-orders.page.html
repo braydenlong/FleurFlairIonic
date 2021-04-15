@@ -7,20 +7,26 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-content>
+
   <ion-card>      
 	  
     <ion-card-content>
       
-  <ion-list>
-    <ion-button expand="full" *ngFor="let order of orders" (click)="viewOrderDetails($event, order)">
-      <ion-icon slot="start" name="arrow-forward"></ion-icon>
-      {{order.orderId}} - {{order.orderDateTime}}
-    </ion-button>
-  </ion-list>
+    <ion-list>
+      <ion-button expand="full" *ngFor="let order of orders" (click)="viewOrderDetails($event, order)">
+        <ion-icon slot="start" name="arrow-forward"></ion-icon>
+        {{order.orderId}} - {{order.orderDateTime}}
+      </ion-button>
+    </ion-list>
   
     </ion-card-content>
   
   </ion-card>	
 
-</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Fleur Flair. All Rights Reserved</ion-title>
+  </ion-toolbar>
+</ion-footer>

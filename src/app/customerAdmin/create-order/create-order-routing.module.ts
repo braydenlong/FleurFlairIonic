@@ -6,7 +6,7 @@ import { CreateOrderPage } from './create-order.page';
 const routes: Routes = [
   {
     path: '',
-    component: CreateOrderPage
+    component: CreateOrderPage 
   }
 ];
 
