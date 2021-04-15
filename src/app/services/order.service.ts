@@ -15,7 +15,7 @@ const httpOptions = {
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 
 export class OrderService {
 
@@ -25,7 +25,7 @@ export class OrderService {
                 private sessionService: SessionService)
     {
 
-    }
+    } 
 
 
 
@@ -63,11 +63,11 @@ export class OrderService {
 	
 	
 	
-    updateProduct(orderToUpdate: Order): Observable<any>
+    updateOrder(orderToUpdate: Order): Observable<any>
     {
-      let updateProductReq: UpdateOrderReq = new UpdateOrderReq(this.sessionService.getUsername(), this.sessionService.getPassword(), orderToUpdate);
+      let updateOrderReq: UpdateOrderReq = new UpdateOrderReq(this.sessionService.getUsername(), this.sessionService.getPassword(), orderToUpdate);
       
-      return this.httpClient.post<any>(this.baseUrl, updateProductReq, httpOptions).pipe
+      return this.httpClient.post<any>(this.baseUrl, updateOrderReq, httpOptions).pipe
       (
         catchError(this.handleError)
       );
