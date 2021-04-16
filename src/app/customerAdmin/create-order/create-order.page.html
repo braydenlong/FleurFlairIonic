@@ -71,7 +71,7 @@
           <ion-item>
             <ion-label><b>Bouquet Type</b></ion-label>
             <ion-select placeholder="Select One" id="type" name="type" 
-              [(ngModel)]="type" required="true">
+              [(ngModel)]="newOrder.bouquet.type" required="true">
               <ion-select-option value = {{BouquetTypeEnum.FIXED}}>Fixed</ion-select-option>
               <ion-select-option value = {{BouquetTypeEnum.CUSTOM}}>Custom</ion-select-option>
             </ion-select>
@@ -81,7 +81,7 @@
           <ion-item>
             <ion-label><b>Bouquet Size</b></ion-label>
             <ion-select placeholder="Select One" id="size" name="size" 
-              [(ngModel)]="size" required="true">
+              [(ngModel)]="newOrder.bouquet.size" required="true">
               <ion-select-option value = {{SizeEnum.SMALL}}>Small</ion-select-option>
               <ion-select-option value = {{SizeEnum.MEDIUM}}>Medium</ion-select-option>
               <ion-select-option value = {{SizeEnum.LARGE}}>Large</ion-select-option>
@@ -92,9 +92,11 @@
 
           <ion-item>
             <ion-label><b>Flowers</b></ion-label>
-            <ion-select placeholder="Select A Main Flower" id="flower" name="flower" 
-              [(ngModel)]="flowerIds" required="true">
-              <ion-select-option *ngFor="let flower of flowers" value="{{flower.flowerId}}">{{flower.name}}
+            <ion-select placeholder="Select A Main Flower" id="mainFlower" name="mainFlower" #mainFlowers = "ngModel"
+              [(ngModel)]="mainFlowersId" required="true">
+              <ion-select-option *ngFor="let mainFlower of mainFlowers" value="{{mainFlower.flowerId}}">
+                  
+                {{mainFlower.name}}
               </ion-select-option>
             </ion-select>
             </ion-item>
@@ -133,9 +135,10 @@
 
           <ion-item>
             <ion-label><b>Wrappings</b></ion-label>
-            <ion-select placeholder="Select One" id="wrapping" name="wrapping" [(ngModel)]="wrappingId" 
-            required = "true">
-              <ion-select-option *ngFor="let wrapping of wrappings" value="{{wrappping.wrappingId}}">{{wrapping.name}}</ion-select-option>
+            <ion-select placeholder="Select One" id="wrapping" name="wrapping" #category="ngModel"
+              [(ngModel)]="wrappingId" required="true">
+              <ion-select-option *ngFor="let wrapping of wrappings" value="{{wrapping.wrappingId}}">{{wrapping.name}}
+              </ion-select-option>
             </ion-select>
           </ion-item>
         

@@ -29,7 +29,7 @@ export class WrappingService {
 
     getWrappings(): Observable<Wrapping[]>
     {		
-      return this.httpClient.get<Wrapping[]>(this.baseUrl + "/retrieveAllWrappings?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+      return this.httpClient.get<Wrapping[]>(this.baseUrl + "/retrieveAllWrappings").pipe
       (
         catchError(this.handleError)
       );

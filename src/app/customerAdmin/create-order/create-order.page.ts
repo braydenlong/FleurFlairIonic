@@ -20,12 +20,15 @@ export class CreateOrderPage implements OnInit {
 
   submitted: boolean;
   newOrder: Order;
+  newBouquet: Bouquet;
   orderDateTime: Date;
 
-  flowerId: string[];
-  wrappingId: string[];
+  mainFlowersId: string[];
+  fillerFlowersId: string[];
+  wrappingId: string;
 
-  flowers: Flower[];
+  mainFlowers: Flower[];
+  fillerFlowers: Flower[];
   wrappings: Wrapping[];
 
   resultSuccess: boolean;
@@ -46,18 +49,28 @@ export class CreateOrderPage implements OnInit {
   }
 
   ngOnInit() {
-    this.flowerService.getFlowers().subscribe(
+    this.flowerService.getMainFlowers().subscribe(
       response => {
-        this.flowers = response;
+        this.mainFlowers = response;
       },
       error => {
-        console.log("Cannot retrieve flowers");
+        console.log("Cannot retrieve main flowers");
+      }
+    );
+
+    this.flowerService.getFillerFlowers().subscribe(
+      response => {
+        this.fillerFlowers = response;
+      },
+      error => {
+        console.log("Cannot retrieve filler flowers");
       }
     );
 
     this.wrappingService.getWrappings().subscribe(
       response => {
-        this.wrappings = response;
+        this.wrappings = JSON.parse(JSON.stringify(response));
+        console.log(this.wrappings[0].name);
       },
       error => {
         console.log("Cannot retrieve wrappings");

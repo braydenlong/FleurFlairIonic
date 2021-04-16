@@ -28,7 +28,23 @@ export class FlowerService {
 
     getFlowers(): Observable<Flower[]>
     {		
-      return this.httpClient.get<Flower[]>(this.baseUrl + "/retrieveAllFlowers?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+      return this.httpClient.get<Flower[]>(this.baseUrl + "/retrieveAllFlowers").pipe
+      (
+        catchError(this.handleError)
+      );
+    }
+
+    getMainFlowers(): Observable<Flower[]>
+    {		
+      return this.httpClient.get<Flower[]>(this.baseUrl + "/retrieveAllMainFlowers").pipe
+      (
+        catchError(this.handleError)
+      );
+    }
+    
+    getFillerFlowers(): Observable<Flower[]>
+    {		
+      return this.httpClient.get<Flower[]>(this.baseUrl + "/retrieveAllFillerFlowers").pipe
       (
         catchError(this.handleError)
       );
