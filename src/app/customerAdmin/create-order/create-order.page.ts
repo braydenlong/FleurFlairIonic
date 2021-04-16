@@ -29,7 +29,7 @@ export class CreateOrderPage implements OnInit {
 
   mainFlowers: Flower[];
   fillerFlowers: Flower[];
-  wrappings: Wrapping[];
+  wrappings: Wrapping[]=[];
 
   resultSuccess: boolean;
   resultError: boolean;
