@@ -28,10 +28,12 @@ const routes: Routes = [
   {
     path: 'view-orders',
     loadChildren: () => import('./customerAdmin/view-orders/view-orders.module').then( m => m.ViewOrdersPageModule)
-  },  {
+  },
+  {
     path: 'view-order-details',
     loadChildren: () => import('./customerAdmin/view-order-details/view-order-details.module').then( m => m.ViewOrderDetailsPageModule)
-  }
+  },
+  
 
 
 

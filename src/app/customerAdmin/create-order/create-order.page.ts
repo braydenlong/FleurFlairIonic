@@ -76,7 +76,7 @@ export class CreateOrderPage implements OnInit {
 
     this.wrappingService.getWrappings().subscribe(
       response => {
-        this.wrappings = JSON.parse(JSON.stringify(response));
+        this.wrappings = response;
         console.log(this.wrappings[0].name);
       },
       error => {
@@ -90,6 +90,8 @@ export class CreateOrderPage implements OnInit {
   clear() {
     this.submitted = false;
     this.newOrder = new Order();
+    this.newBouquet = new Bouquet();
+    console.log("Nani");
   }
 
   create(createOrderForm: NgForm) {

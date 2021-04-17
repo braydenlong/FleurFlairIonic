@@ -1,18 +1,21 @@
 <ion-header>
-  <ion-toolbar color = "dark">
+
+  <ion-toolbar color ="dark">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title><b>Create New Order</b></ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 
+<ion-content>
   <form #createOrderForm="ngForm" (ngSubmit)="create(createOrderForm)">
     <ion-card>
 
       
-
+      <ion-card-content>
         <div *ngIf="resultSuccess == true" style="color: blue;">
           {{message}}
         </div>
@@ -61,6 +64,15 @@
         </div>
 
         <ion-list>
+
+          <ion-item>
+            <ion-label><b>Wrappings</b></ion-label>
+            <ion-select placeholder="Select One" id="wrapping" name="wrapping" 
+              [(ngModel)]="wrappingId" required="true">
+              <ion-select-option *ngFor="let wrapping of wrappings" value="{{wrapping.wrappingId}}">{{wrapping.name}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
 
           <ion-item>
             <ion-label><b>Bouquet Name</b></ion-label>
@@ -145,7 +157,7 @@
 
         </ion-list>
 
-      
+      </ion-card-content>
 
     </ion-card>
 
@@ -163,6 +175,11 @@
     </ion-card>
 
   </form>
+
+</ion-content>
+
+
+
 
 
 
