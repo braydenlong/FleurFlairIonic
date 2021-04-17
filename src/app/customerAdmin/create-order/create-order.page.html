@@ -11,81 +11,35 @@
 
 
 <ion-content>
-  <form #createOrderForm="ngForm" (ngSubmit)="create(createOrderForm)">
-    <ion-card>
+      <div *ngIf="resultSuccess == true" style="color: limegreen;">
+        {{message}}
+      </div>
+
+      <div *ngIf="resultError == true" style="color: red;">
+        {{message}}
+      </div>
+  
+    
 
       
-      <ion-card-content>
-        <div *ngIf="resultSuccess == true" style="color: blue;">
-          {{message}}
-        </div>
+      
+        <form #createOrderForm="ngForm" (ngSubmit)="create(createOrderForm)">
 
-        <div *ngIf="resultError == true" style="color: red;">
-          {{message}}
-        </div>
-
-        <div style="color: red;">
-
-         
-
-          <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
-            <div *ngIf="name.errors.required">
-              Your bouquet name is required.
-            </div>
-          </div>
-
-          <div *ngIf="size.invalid && (size.dirty || size.touched || submitted)" class="errorText">
-            <div *ngIf="size.errors.required">
-              Bouquet size is required.
-            </div>
-          </div>
-
-          <div *ngIf="type.invalid && (type.dirty || type.touched || submitted)"
-            class="errorText">
-            <div *ngIf="type.errors.required">
-              Bouquet type is required.
-            </div>
-          </div>
-
-          <div *ngIf="flowers.invalid && (flowers.dirty || flowers.touched || submitted)"
-            class="errorText">
-            <div *ngIf="flowers.errors.required">
-              Flower selection is required.
-            </div>
-          </div>
-
-          <div *ngIf="wrapping.invalid && (wrapping.dirty || wrapping.touched || submitted)"
-            class="errorText">
-            <div *ngIf="wrapping.errors.required">
-              Wrapping selection is required.
-            </div>
-          </div>
-
-        </div>
-
-        <ion-list>
-
-          <ion-item>
-            <ion-label><b>Wrappings</b></ion-label>
-            <ion-select placeholder="Select One" id="wrapping" name="wrapping" 
-              [(ngModel)]="wrappingId" required="true">
-              <ion-select-option *ngFor="let wrapping of wrappings" value="{{wrapping.wrappingId}}">{{wrapping.name}}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
+        
 
           <ion-item>
             <ion-label><b>Bouquet Name</b></ion-label>
-            <ion-input type="text" id="name" name="name" [(ngModel)]="newOrder.bouquet.name" required="true" >
+            <ion-input type="text" id="name" name="name" [(ngModel)]="newBouquet.name" required="true" >
             </ion-input>
           </ion-item>
+          
 
           <ion-item>
             <ion-label><b>Bouquet Type</b></ion-label>
             <ion-select placeholder="Select One" id="type" name="type" 
-              [(ngModel)]="newOrder.bouquet.type" required="true">
-              <ion-select-option value = {{BouquetTypeEnum.FIXED}}>Fixed</ion-select-option>
-              <ion-select-option value = {{BouquetTypeEnum.CUSTOM}}>Custom</ion-select-option>
+              [(ngModel)]="newBouquet.type" required="true" multiple ="false">
+              <ion-select-option value = "bouquetTypeEnum.FIXED">Fixed</ion-select-option>
+              <ion-select-option value = "bouquetTypeEnum.CUSTOM">Custom</ion-select-option>
             </ion-select>
           </ion-item>
 
@@ -93,38 +47,54 @@
           <ion-item>
             <ion-label><b>Bouquet Size</b></ion-label>
             <ion-select placeholder="Select One" id="size" name="size" 
-              [(ngModel)]="newOrder.bouquet.size" required="true">
-              <ion-select-option value = {{SizeEnum.SMALL}}>Small</ion-select-option>
-              <ion-select-option value = {{SizeEnum.MEDIUM}}>Medium</ion-select-option>
-              <ion-select-option value = {{SizeEnum.LARGE}}>Large</ion-select-option>
+              [(ngModel)]="newBouquet.size" required="true">
+              <ion-select-option value = "bouquetSizeEnum.SMALL">Small</ion-select-option>
+              <ion-select-option value = "bouquetSizeEnum.MEDIUM">Medium</ion-select-option>
+              <ion-select-option value = "bouquetSizeEnum.LARGE">Large</ion-select-option>
               
             </ion-select>
           </ion-item>
+        
           
 
           <ion-item>
             <ion-label><b>Flowers</b></ion-label>
-            <ion-select placeholder="Select A Main Flower" id="mainFlower" name="mainFlower" #mainFlowers = "ngModel"
+            <ion-select placeholder="Select A Main Flower" id="mainFlower" name="mainFlower" #mainFlower = "ngModel"
               [(ngModel)]="mainFlowersId" required="true">
-              <ion-select-option *ngFor="let mainFlower of mainFlowers" value="{{mainFlower.flowerId}}">
+              <ion-select-option *ngFor="let flower of mainFlowers" value="{{flower.flowerId}}">
                   
-                {{mainFlower.name}}
+                {{flower.name}}
               </ion-select-option>
             </ion-select>
             </ion-item>
 
-         
-          <div *ngIf = "size == SizeEnum.SMALL">
             <ion-item>
-            <ion-label><b>Fillers</b></ion-label>
-            <ion-select placeholder="Select One" id="flower" name="flower" 
-              [(ngModel)]="flowerIds" required="true">
-              <ion-select-option *ngFor="let flower of flowers" value="{{flower.flowerId}}">{{flower.name}}
-              </ion-select-option>
-            </ion-select>
+              <ion-label><b>Fillers</b></ion-label>
+              <ion-select placeholder="Select Two" id="flower" name="flower" 
+                [(ngModel)]="fillerFlowerIds" required="true" multiple = "true">
+                <ion-select-option *ngFor="let flower of fillerFlowers" value="{{flower.flowerId}}">{{flower.name}}
+                </ion-select-option>
+              </ion-select>
+              </ion-item>
+            
+
+            <ion-item>
+              <ion-label><b>Wrappings</b></ion-label>
+              <ion-select placeholder="Select One" id="wrapping" name="wrapping" 
+                [(ngModel)]="wrappingId" required="true">
+                <ion-select-option *ngFor="let wrapping of wrappings" value="{{wrapping.wrappingId}}">{{wrapping.name}}
+                </ion-select-option>
+              </ion-select>
             </ion-item>
-          </div>
-          <div *ngIf = "size == SizeEnum.MEDIUM">
+
+            <ion-item>
+              <ion-label><b>Delivery Date</b></ion-label>
+              <ion-datetime [(ngModel)] = "newOrder.orderDateTime"></ion-datetime>
+            </ion-item>
+
+  
+          
+          <!-- <div *ngIf = "newBouquet.size == bouquetSizeEnum.MEDIUM">
             <ion-item>
             <ion-label><b>Fillers</b></ion-label>
             <ion-select placeholder="Select Multiple" id="filler" name="flower" 
@@ -134,7 +104,7 @@
             </ion-select>
             </ion-item>
           </div>
-          <div *ngIf = "size == SizeEnum.LARGE">
+          <div *ngIf = "newBouquet.size == bouquetSizeEnum.LARGE">
             <ion-item>
             <ion-label><b>Fillers</b></ion-label>
             <ion-select placeholder="Select Multiple" id="filler" name="flower" 
@@ -143,38 +113,26 @@
               </ion-select-option>
             </ion-select>
             </ion-item>
-          </div>
+          </div> -->
 
-          <ion-item>
-            <ion-label><b>Wrappings</b></ion-label>
-            <ion-select placeholder="Select One" id="wrapping" name="wrapping" #category="ngModel"
-              [(ngModel)]="wrappingId" required="true">
-              <ion-select-option *ngFor="let wrapping of wrappings" value="{{wrapping.wrappingId}}">{{wrapping.name}}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
         
 
-        </ion-list>
+          <ion-item>
+            <ion-button type='submit'>
+                Create Order
+            </ion-button>
+            <ion-button (click)='clear()'>
+                Clear
+            </ion-button>
+        </ion-item>
+        
 
-      </ion-card-content>
+        
+        </form>
 
-    </ion-card>
+      <!-- </ion-card-content>
 
-    <ion-card style="text-align: center;">
-
-      <ion-card-content>
-        <ion-button (click)="clear()">
-          Clear
-        </ion-button>
-        <ion-button type="submit" ion-button block>
-          Create Bouquet
-        </ion-button>
-      </ion-card-content>
-
-    </ion-card>
-
-  </form>
+    </ion-card> -->
 
 </ion-content>
 

@@ -11,6 +11,8 @@ import {BouquetService} from '../../services/bouquet.service';
 import { Order } from '../../models/order';
 import {Bouquet} from '../../models/bouquet'
 import { Flower } from '../../models/flower';
+import {BouquetTypeEnum} from '../../models/bouquet-type-enum.enum';
+import {SizeEnum} from '../../models/size-enum.enum';
 import { Wrapping } from '../../models/wrapping';
 import { OrderStatusEnum } from 'src/app/models/order-status-enum.enum';
 
@@ -27,12 +29,19 @@ export class CreateOrderPage implements OnInit {
   orderDateTime: Date;
 
   mainFlowersId: string[];
+  selectedMainFlower: Flower[];
   fillerFlowersId: string[];
+  selectedFillerFlowers: Flower[];
   wrappingId: string;
+  selectedWrapping: Wrapping;
 
   mainFlowers: Flower[];
   fillerFlowers: Flower[];
   wrappings: Wrapping[];
+  bouquetTypeEnum: BouquetTypeEnum;
+  bouquetSizeEnum: SizeEnum;
+
+  currentTotalPrice: 0;
 
   resultSuccess: boolean;
   resultError: boolean;
@@ -50,6 +59,7 @@ export class CreateOrderPage implements OnInit {
     this.newOrder = new Order();
     this.newBouquet = new Bouquet();
     
+    
 
     this.resultSuccess = false;
     this.resultError = false;
@@ -59,6 +69,7 @@ export class CreateOrderPage implements OnInit {
     this.flowerService.getMainFlowers().subscribe(
       response => {
         this.mainFlowers = response;
+        console.log(this.mainFlowers[0]);
       },
       error => {
         console.log("Cannot retrieve main flowers");
@@ -96,15 +107,19 @@ export class CreateOrderPage implements OnInit {
 
   create(createOrderForm: NgForm) {
     
-    let longMainFlowersIds: number[] = new Array();
+    let longMainFlowersId: number[] = new Array();
     let longFillerFlowersIds: number[] = new Array();
+    let totalPrice: 0;
 
-    if (this.mainFlowersId != null && this.fillerFlowersId != null) {
-      for (var i = 0; i < this.mainFlowersId.length; i++) {
-        longMainFlowersIds.push(parseInt(this.mainFlowersId[i]));
+    if (this.selectedMainFlower != null && this.selectedFillerFlowers != null) {
+      for (var i = 0; i < this.selectedMainFlower.length; i++) {
+        longMainFlowersId.push(this.selectedMainFlower[i].flowerId);
+        totalPrice += this.selectedMainFlower[i].price;
+        
       }
-      for (var j = 0; i < this.fillerFlowersId.length; j++){
-        longFillerFlowersIds.push(parseInt(this.fillerFlowersId[j]));
+      for (var j = 0; j < this.selectedFillerFlowers.length; j++){
+        longFillerFlowersIds.push(this.selectedFillerFlowers[j].flowerId);
+        totalPrice += this.selectedFillerFlowers[j].price;
       }
     }
 
